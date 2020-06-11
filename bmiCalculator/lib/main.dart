@@ -1,20 +1,20 @@
+import 'package:bmiCalculator/homeScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(HomeScreen());
+  runApp(BMICalculator());
 }
 
-class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
+class BMICalculator extends StatefulWidget {
+  BMICalculator({Key key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _BMICalculatorState createState() => _BMICalculatorState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _BMICalculatorState extends State<BMICalculator> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-    );
+    return MaterialApp(home: HomeScreen());
   }
 }
