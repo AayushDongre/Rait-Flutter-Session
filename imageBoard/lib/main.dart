@@ -21,6 +21,7 @@ class _ImageBoardState extends State<ImageBoard> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: dark == false ? ThemeData.light() : ThemeData.dark(),
+      debugShowCheckedModeBanner: false,
       home: HomeScreen(switchTheme: this.switchTheme,theme:dark),
     );
   }

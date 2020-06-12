@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:imageBoard/models/galleryImage.dart';
@@ -39,9 +38,6 @@ class _ImageGridState extends State<ImageGrid> {
     super.initState();
     fetchImage();
     _scrollController.addListener(() {
-      print(_scrollController.position.pixels);
-      print(_scrollController.position.maxScrollExtent -
-          MediaQuery.of(context).size.height);
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent - 300) {
         page++;
