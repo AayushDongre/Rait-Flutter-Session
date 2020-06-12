@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-Widget genderbutton(String asset, BuildContext context) {
+Widget genderbutton(BuildContext context, String asset, {bool selected = false}) {
   return Container(
     width: MediaQuery.of(context).size.width / 3,
     height: MediaQuery.of(context).size.width / 3,
     child: Image.asset(asset),
     decoration: BoxDecoration(
-        color: Colors.white,
+        color: selected == true ? Colors.grey[350] : Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black26,

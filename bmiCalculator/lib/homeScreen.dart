@@ -12,7 +12,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool gender = true;  
+  bool gender = true;
+  TextEditingController ageController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+  double bmi = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(color: Colors.white70),
                 ),
                 Text(
-                  '0.0',
+                  bmi.toStringAsFixed(2),
                   style: TextStyle(color: Colors.white, fontSize: 80),
                 )
               ],
@@ -62,18 +66,19 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                
                 GestureDetector(
-                  child: genderbutton('assets/male.png', context),
-                  onTap: (){
+                  child: genderbutton(context, 'assets/male.png',
+                      selected: gender == true ? true : false),
+                  onTap: () {
                     setState(() {
                       gender = true;
                     });
                   },
                 ),
                 GestureDetector(
-                  child: genderbutton('assets/female.png', context),
-                  onTap: (){
+                  child: genderbutton(context, 'assets/female.png',
+                      selected: gender == true ? false : true),
+                  onTap: () {
                     setState(() {
                       gender = false;
                     });
@@ -86,29 +91,41 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.symmetric(vertical: 32),
             child: Row(
               children: <Widget>[
-                detailsInput(context, 'AGE', Color(0XFFF982C2)),
-                detailsInput(context, 'HEIGHT', Color(0XFFFFDE82)),
-                detailsInput(context, 'WEIGHT', Color(0XFF85BEFF)),
+                detailsInput(context, 'AGE', Color(0XFFF982C2), ageController),
+                detailsInput(
+                    context, 'HEIGHT', Color(0XFFFFDE82), heightController),
+                detailsInput(
+                    context, 'WEIGHT', Color(0XFF85BEFF), weightController),
               ],
             ),
           ),
           Column(
             children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                height: 50,
-                child: Center(
-                  child: Text(
-                    'SUBMIT',
-                    style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900),
+              GestureDetector(
+                onTap: () {
+                  int age = int.parse(ageController.text.toString());
+                  int height = int.parse(heightController.text.toString());
+                  int weight = int.parse(weightController.text.toString());
+                  setState(() {
+                    bmi = weight / (height/100 * height/100);
+                  });
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: 50,
+                  child: Center(
+                    child: Text(
+                      'SUBMIT',
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900),
+                    ),
                   ),
-                ),
-                decoration: BoxDecoration(
-                  color: green,
-                  borderRadius: BorderRadius.circular(16),
+                  decoration: BoxDecoration(
+                    color: green,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                 ),
               ),
             ],
